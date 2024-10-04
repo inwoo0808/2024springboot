@@ -35,4 +35,21 @@ public class MyController {
 		return "view";
 	}
 	
+	@RequestMapping("/writerForm") 
+	public String writer() {
+		return "writerForm";
+	}
+	
+	@RequestMapping("/write")
+	public String write(HttpServletRequest request) {
+		dao.writeDao(request.getParameter("writer"), request.getParameter("title"), request.getParameter("content"));
+		return "redirect:list";
+	}
+	
+	@RequestMapping("/delete")
+	public String delete(HttpServletRequest request,Model model) {
+		dao.delete(request.getParameter("id"));
+		return "redirect:list";
+	}
+	
 }
