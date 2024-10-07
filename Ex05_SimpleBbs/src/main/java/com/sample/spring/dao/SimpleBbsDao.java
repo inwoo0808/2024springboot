@@ -1,3 +1,4 @@
+
 package com.sample.spring.dao;
 
 import java.util.List;
@@ -48,18 +49,19 @@ public class SimpleBbsDao implements ISimpleBbsDao{
 
 	@Override
 	public int writeDao(String writer, String title, String content) {
-		System.out.println("writeDao()");
-		String query = "insert into simple_bbs(writer, title, content) values (?, ?, ?)";
-				
-		return template.update(query, writer, title, content);
+		System.out.println("wirteDao()");
+		String query = "insert into simple_bbs (writer,title,content) values (?,?,?) ";
+		int dtoup = template.update(query,writer,title,content);
+		return dtoup;
 	}
 
 	@Override
 	public int delete(String id) {
-		System.out.println("delete");
+		System.out.println("delete()");
 		String query = "delete from simple_bbs where id = ?";
+		int dtodel = template.update(query,Integer.parseInt(id));
+		return dtodel;
 		
-		return template.update(query, Integer.parseInt(id));
 	}
 
 }
