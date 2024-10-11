@@ -57,7 +57,7 @@ public class FoodService {
 			CreateAndEditFoodRequest request
 			) {
 		FoodEntity food = foodRepository.findById(foodId).orElseThrow(()->new RuntimeException("no food"));
-		food.changeNameAndAddress(request.getName(), request.getAddress());
+		food.changeNameandAddress(request.getName(), request.getAddress());
 		foodRepository.save(food);
 		
 		List<MenuEntity> menus = menuRepository.findAllByFoodId(foodId); 
@@ -124,8 +124,4 @@ public class FoodService {
 	}
 	
 	
-	
-	
-	
-}
 }
