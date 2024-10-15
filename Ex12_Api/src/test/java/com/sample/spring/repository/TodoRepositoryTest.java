@@ -1,6 +1,5 @@
 package com.sample.spring.repository;
 
-
 import java.time.LocalDate;
 import java.util.Optional;
 
@@ -17,7 +16,7 @@ import com.sample.spring.model.TodoEntity;
 import lombok.extern.log4j.Log4j2;
 
 @SpringBootTest
-@Log4j2 //로그창 띄울때 사용
+@Log4j2
 public class TodoRepositoryTest {
 
 	@Autowired
@@ -25,17 +24,16 @@ public class TodoRepositoryTest {
 	
 //	@Test
 //	public void testInsert() {
-//		for(int i=0; i<100;i++) {
-//			TodoEntity todo = TodoEntity.builder()
-//				.title("title" + i)
+//		for(int i=0;i<100;i++) {
+//		TodoEntity todo = TodoEntity.builder()
+//				.title("title"+i)
 //				.writer("writer...")
-//				.dueDate(LocalDate.of(2024, 10, 14))
+//				.dueDate(LocalDate.of(2024, 10, 15))
 //				.build();
 //		
 //		TodoEntity result = todoRepository.save(todo);
 //		log.info(result);
 //		}
-//		
 //	}
 	
 //	@Test
@@ -43,8 +41,8 @@ public class TodoRepositoryTest {
 //		Long tno = 1L;
 //		Optional<TodoEntity> result = todoRepository.findById(tno);
 //		TodoEntity todo = result.orElseThrow();
-//		log.info(todo);
-//	
+//		log.info("test//////////"+todo);
+//		
 //	}
 	
 //	@Test
@@ -60,16 +58,18 @@ public class TodoRepositoryTest {
 //	}
 	
 //	@Test
-//	public void testPaging() {
+//	public void testPageing() {
 //		Pageable pageable = PageRequest.of(0, 10, Sort.by("tno").descending());
 //		Page<TodoEntity> result = todoRepository.findAll(pageable);
+//		
 //		log.info(result.getTotalElements());
 //		log.info(result.getContent());
 //	}
 	
-	@Test
-	public void testSearch1() {
-		todoRepository.search1();
-	}
+//	@Test
+//	public void testSearch1() {
+//		todoRepository.search1();
+//	}
+	
 	
 }
