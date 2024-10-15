@@ -9,28 +9,31 @@ public interface TodoService {
 	public Long postTodo(TodoDto dto);
 	
 	public void modify(TodoDto dto);
+	
 	public void remove(Long tno);
 	
-	
+	//Entity에서 Dto로, Dto에서 Entity로 서로 주고받는 값을 미리 정의
+	//post
 	default TodoDto entityToDto(TodoEntity todo) {
 		TodoDto todoDto = TodoDto.builder()
 				.tno(todo.getTno())
 				.title(todo.getTitle())
-				.write(todo.getWriter())
+				.writer(todo.getWriter())
 				.complete(todo.isComplete())
 				.dueDate(todo.getDueDate())
 				.build();
-		return todoDto;
-	}
+		return todoDto; 
+	};
 	
+	//get
 	default TodoEntity dtoToEntity(TodoDto todoDto) {
 		TodoEntity todoEntity = TodoEntity.builder()
 				.tno(todoDto.getTno())
 				.title(todoDto.getTitle())
-				.writer(todoDto.getWrite())
+				.writer(todoDto.getWriter())
 				.complete(todoDto.isComplete())
 				.dueDate(todoDto.getDueDate())
 				.build();
 		return todoEntity;
-	}
+	};
 }

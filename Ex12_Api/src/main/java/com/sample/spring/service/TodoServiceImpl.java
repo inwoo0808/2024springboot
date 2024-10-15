@@ -9,28 +9,26 @@ import com.sample.spring.dto.TodoDto;
 import com.sample.spring.model.TodoEntity;
 import com.sample.spring.repository.TodoRepository;
 
-
 @Service
-public class TodoServiceImpl implements TodoService {
+public class TodoServiceImpl implements TodoService{
 
 	@Autowired
 	private TodoRepository todoRepository;
 	
 	@Override
 	public TodoDto get(Long tno) {
-		
 		Optional<TodoEntity> result = todoRepository.findById(tno);
 		TodoEntity todo = result.orElseThrow();
-
+		
 		return entityToDto(todo);
 	}
 
 	@Override
 	public Long postTodo(TodoDto dto) {
-		TodoEntity todo = dtoToEntity(dto);
+		TodoEntity todo = dtoToEntity(dto); //service interface로 만든 것
 		TodoEntity result = todoRepository.save(todo);
-		
-		return result.getTno();
+	
+		return result.getTno();//몇번째인지 return
 	}
 
 	@Override
@@ -43,14 +41,10 @@ public class TodoServiceImpl implements TodoService {
 		todo.changeDueDate(dto.getDueDate());
 		
 		todoRepository.save(todo);
-		
 	}
 
 	@Override
 	public void remove(Long tno) {
 		todoRepository.deleteById(tno);
 	}
-	
-	
-
 }

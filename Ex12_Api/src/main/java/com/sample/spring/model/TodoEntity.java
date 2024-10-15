@@ -13,14 +13,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
-
 @Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @ToString
-@Table(name="tbl_todo")
+@Table(name="tb1_todo")
 public class TodoEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,9 +28,14 @@ public class TodoEntity {
 	private String writer;
 	private boolean complete;
 	private LocalDate dueDate;
-	
+	public void setTno(Long tno) {
+		this.tno = tno;
+	}
 	public void changeTitle(String title) {
 		this.title = title;
+	}
+	public void changeWriter(String writer) {
+		this.writer = writer;
 	}
 	public void changeComplete(boolean complete) {
 		this.complete = complete;
@@ -39,7 +43,6 @@ public class TodoEntity {
 	public void changeDueDate(LocalDate dueDate) {
 		this.dueDate = dueDate;
 	}
-	
 	
 	
 }
