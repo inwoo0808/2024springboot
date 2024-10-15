@@ -21,7 +21,7 @@ public class TodoRepositoryTest {
 
 	@Autowired
 	private TodoRepository todoRepository;
-	
+//	
 //	@Test
 //	public void testInsert() {
 //		for(int i=0;i<100;i++) {
