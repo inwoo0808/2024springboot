@@ -32,6 +32,14 @@ public class CustomSecurityConfig {
 		http.csrf(config -> config.disable());
 		http.sessionManagement(sessionConfig -> sessionConfig.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 		
+		http.formLogin(
+				config -> {
+					config.loginPage("/api/member/login");
+					config.successHandler(null); //token 발행, 정보 출력(ex: 200OK)
+					config.failureHandler(null); //200OK, 회원 자료 x
+				}
+				);
+		
 		return http.build();
 	}
 	
