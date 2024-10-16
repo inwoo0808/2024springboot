@@ -3,11 +3,12 @@ package com.sample.spring.service;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.sample.spring.Entity.FileEntity;
+import com.sample.spring.Domain.FileEntity;
 import com.sample.spring.repository.FileDataRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -54,7 +55,10 @@ public class FileDataService {
 		
 		return Files.readAllBytes(new File(filePath).toPath());
 	}
-	
+
+	public List<FileEntity> findAll() {
+		return fileDataRepository.findAll();
+	}
 	
 	
 }

@@ -1,4 +1,4 @@
-package com.sample.spring.Entity;
+package com.sample.spring.Domain;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
