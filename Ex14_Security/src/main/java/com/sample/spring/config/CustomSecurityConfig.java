@@ -9,9 +9,14 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import com.sample.spring.security.APILoginFailHandler;
+import com.sample.spring.security.APILoginSuccessHandler;
+import com.sample.spring.security.filter.JWTCheckFilter;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -35,11 +40,12 @@ public class CustomSecurityConfig {
 		http.formLogin(
 				config -> {
 					config.loginPage("/api/member/login");
-					config.successHandler(null); //token 발행, 정보 출력(ex: 200OK)
-					config.failureHandler(null); //200OK, 회원 자료 x
+					config.successHandler(new APILoginSuccessHandler()); //token 발행, 정보 출력(ex: 200OK)
+					config.failureHandler(new APILoginFailHandler()); //200OK, 회원 자료 x
 				}
 				);
 		
+		http.addFilterBefore(new JWTCheckFilter(), UsernamePasswordAuthenticationFilter.class);
 		return http.build();
 	}
 	
