@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,6 +18,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import com.sample.spring.security.APILoginFailHandler;
 import com.sample.spring.security.APILoginSuccessHandler;
 import com.sample.spring.security.filter.JWTCheckFilter;
+import com.sample.spring.security.handler.CustomAccessDeniedHandler;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -24,6 +26,7 @@ import lombok.extern.log4j.Log4j2;
 @Configuration
 @Log4j2
 @RequiredArgsConstructor
+@EnableMethodSecurity
 public class CustomSecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http)throws Exception {
@@ -46,6 +49,11 @@ public class CustomSecurityConfig {
 				);
 		
 		http.addFilterBefore(new JWTCheckFilter(), UsernamePasswordAuthenticationFilter.class);
+		
+		http.exceptionHandling(config -> {
+			config.accessDeniedHandler(new CustomAccessDeniedHandler());
+		});
+		
 		return http.build();
 	}
 	
